@@ -10,6 +10,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:motion/motion.dart';
 import 'package:notetaking/app/controller/app_controller.dart';
 import 'package:notetaking/firebase_options.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 import 'app/routes/app_pages.dart';
 
@@ -40,7 +41,7 @@ void main() async {
   }
 
   await dotenv.load(fileName: 'dotenv');
-
+  setPathUrlStrategy();
   await Motion.instance.initialize();
   Motion.instance.setUpdateInterval(60.fps);
 
