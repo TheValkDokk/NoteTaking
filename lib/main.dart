@@ -16,20 +16,20 @@ import 'app/routes/app_pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance
-    ..initialize()
-    ..updateRequestConfiguration(
-      RequestConfiguration(testDeviceIds: [
-        '01FB1DAF5731A3F4D6EDD7A34E3C4441',
-        '09CB85794AC27904206320C8283EAECF'
-      ]),
-    );
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
   if (!GetPlatform.isWeb) {
+    MobileAds.instance
+      ..initialize()
+      ..updateRequestConfiguration(
+        RequestConfiguration(testDeviceIds: [
+          '01FB1DAF5731A3F4D6EDD7A34E3C4441',
+          '09CB85794AC27904206320C8283EAECF'
+        ]),
+      );
     FlutterError.onError = (errorDetails) {
       FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
     };
