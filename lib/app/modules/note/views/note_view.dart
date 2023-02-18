@@ -154,7 +154,9 @@ class NoteView extends GetView<NoteController> {
     try {
       color = Color(int.parse(
           "0xFF${snapshot.data()!['color-for-item-pleaseidontknowhowtopreventsomeonefindthiskey']}"));
-    } catch (e) {}
+    } catch (e) {
+      Get.log("");
+    }
     return InkWell(
       onDoubleTap: GetPlatform.isWeb
           ? () async {

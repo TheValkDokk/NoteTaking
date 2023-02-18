@@ -48,7 +48,9 @@ class _HomeViewState extends State<HomeView> {
       );
 
       _bannerAd.load();
-    } catch (e) {}
+    } catch (e) {
+      Get.log(e.toString());
+    }
   }
 
   @override

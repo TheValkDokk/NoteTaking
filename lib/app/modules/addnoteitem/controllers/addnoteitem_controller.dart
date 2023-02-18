@@ -61,13 +61,11 @@ class AddnoteitemController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    print('do something');
     try {
       noteId = Get.parameters['noteId']!;
       docId = Get.parameters['docId']!;
     } catch (e) {
       isCreate = true;
-      print(e);
     }
 
     ever(colSetting, finishInitSetting);
@@ -88,11 +86,11 @@ class AddnoteitemController extends GetxController {
   }
 
   void finishInitSetting(List<Field> f) {
-    print("Finish: ${f.length}");
     if (f.isNotEmpty) {
       translateField();
       createDateValue();
 
+      // ignore: unused_local_variable
       for (var e in fieldSetting) {
         final controller = TextEditingController();
         ctrlList.add(controller);
@@ -103,7 +101,6 @@ class AddnoteitemController extends GetxController {
   }
 
   List<Field> snapshotSetting(DocumentSnapshot<Map<String, dynamic>> element) {
-    print("Snap: ${element.data().toString()}");
     return element
             .data()?['columnSetting']
             ?.map<Field>((item) => Field.fromMap(item))

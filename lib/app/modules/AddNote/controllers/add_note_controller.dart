@@ -204,8 +204,6 @@ class AddNoteController extends GetxController {
           content: const CircularProgressIndicator.adaptive(),
         );
 
-        print(map.toString());
-
         await _saveNoteToFirebase(map);
         Get.back();
         Get.back();
@@ -230,10 +228,7 @@ class AddNoteController extends GetxController {
   }
 
   Future _saveNoteToFirebase(Map<String, dynamic> map) async {
-    await appController.db.collection("notes").add(map).then(
-          (documentSnapshot) =>
-              print("Added Data with ID: ${documentSnapshot.id}"),
-        );
+    await appController.db.collection("notes").add(map);
   }
 
   Future _updateNoteToFirebase(Map<String, dynamic> map) async {

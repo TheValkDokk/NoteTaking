@@ -13,7 +13,7 @@ class NoteItemDetailView extends GetView<NoteItemDetailController> {
         title: const Text('NoteItemDetailView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'NoteItemDetailView is working',
           style: TextStyle(fontSize: 20),
