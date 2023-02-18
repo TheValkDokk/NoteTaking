@@ -1,5 +1,6 @@
 import 'package:animated_switcher_plus/animated_switcher_plus.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firestore_ui/animated_firestore_grid.dart';
 import 'package:firestore_ui/animated_firestore_list.dart';
 import 'package:flutter/material.dart';
@@ -155,6 +156,24 @@ class NoteView extends GetView<NoteController> {
           "0xFF${snapshot.data()!['color-for-item-pleaseidontknowhowtopreventsomeonefindthiskey']}"));
     } catch (e) {}
     return InkWell(
+      onDoubleTap: GetPlatform.isWeb
+          ? () async {
+              Get.defaultDialog(
+                title: "Open on Phone",
+                middleText: "Open this on Phone?",
+                onConfirm: () async {
+                  await appController.db
+                      .collection('commands')
+                      .doc(FirebaseAuth.instance.currentUser!.email)
+                      .set({
+                    'cmd': '/addnoteitem?docId=${snapshot.id}&noteId=$noteId',
+                    'isActive': true,
+                  }).then((value) => Get.back());
+                },
+                onCancel: () {},
+              );
+            }
+          : null,
       onLongPress: () {
         Get.defaultDialog(
           title: "Delete",
