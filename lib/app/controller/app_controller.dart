@@ -8,7 +8,8 @@ class AppController extends GetxController {
   static AppController instance = Get.find();
 
   GoogleProvider googleProvider = GoogleProvider(
-    clientId: dotenv.env['GoogleClientId']!,
+    clientId: dotenv.env[
+        '345963871008-qph34avag3hakk9ffich62ihcia3834c.apps.googleusercontent.com']!,
   );
 
   RxBool isDark = false.obs;
