@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,16 +26,18 @@ class ColorpickerController extends GetxController {
   }
 
   Future saveToFireBase() async {
+    Map<String, dynamic> map = {
+      "color-for-item-pleaseidontknowhowtopreventsomeonefindthiskey":
+          itemColor.value.hex,
+      'color-for-textnote': textColor.value.hex,
+    };
     await appController.db
         .collection('notes')
         .doc(noteId)
         .collection('items')
         .doc(docId)
-        .update({
-      "color-for-item-pleaseidontknowhowtopreventsomeonefindthiskey":
-          itemColor.value.hex,
-      'color-for-textnote': textColor.value.hex,
-    }).then(
+        .set(map, SetOptions(merge: true))
+        .then(
       (value) {
         if (Get.previousRoute == '') {
           Get.offAllNamed('addnoteitem', parameters: {

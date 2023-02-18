@@ -16,6 +16,8 @@ class AddnoteitemController extends GetxController {
   RxList<String> excluValue = <String>[].obs;
   int excluValueIndex = 0;
 
+  Map<String, dynamic> currentItemMap = {};
+
   bool isCreate = false;
 
   //Use for view and update
@@ -43,12 +45,14 @@ class AddnoteitemController extends GetxController {
   }
 
   Future removeItem() async {
+    currentItemMap['isDeleted'] = true;
     await appController.db
         .collection('notes')
         .doc(noteId)
         .collection('items')
         .doc(docId)
-        .update({"isDeleted": true}).then((value) {
+        .set(currentItemMap, SetOptions(merge: true))
+        .then((value) {
       Get.back();
       Get.back();
     });
@@ -109,6 +113,7 @@ class AddnoteitemController extends GetxController {
 
   Map<String, dynamic> dataStream(
       DocumentSnapshot<Map<String, dynamic>> element) {
+    currentItemMap = dataMap;
     if (element.data()!['color-for-textnote'] != null) {
       textColor = element.data()!['color-for-textnote'];
     }
@@ -179,7 +184,7 @@ class AddnoteitemController extends GetxController {
         .doc(noteId)
         .collection('items')
         .doc(docId)
-        .update(map)
+        .set(map, SetOptions(merge: true))
         .then((value) {
       Get.snackbar("Updated", "Data updated");
     });

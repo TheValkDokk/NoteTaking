@@ -41,9 +41,9 @@ class NoteController extends GetxController {
   }
 
   void setGridCount(int i) async {
-    await appController.db.collection('notes').doc(docId).update({
+    await appController.db.collection('notes').doc(docId).set({
       'gridCount': i,
-    });
+    }, SetOptions(merge: true));
   }
 
   bool snapshotBool(DocumentSnapshot<Map<String, dynamic>> element) {
@@ -74,7 +74,7 @@ class NoteController extends GetxController {
     await appController.db
         .collection('notes')
         .doc(docId)
-        .update({'showTitle': !showTitle.value});
+        .set({'showTitle': !showTitle.value}, SetOptions(merge: true));
   }
 
   void optionMenu(String option) {
@@ -92,7 +92,7 @@ class NoteController extends GetxController {
         .doc(docId)
         .collection('items')
         .doc(itemId)
-        .update({"isDeleted": true}).then((value) {
+        .set({"isDeleted": true}, SetOptions(merge: true)).then((value) {
       Get.back();
     });
   }

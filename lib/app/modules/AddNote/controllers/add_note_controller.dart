@@ -237,6 +237,9 @@ class AddNoteController extends GetxController {
   }
 
   Future _updateNoteToFirebase(Map<String, dynamic> map) async {
-    await appController.db.collection("notes").doc(docId).update(map);
+    await appController.db
+        .collection("notes")
+        .doc(docId)
+        .set(map, SetOptions(merge: true));
   }
 }

@@ -19,7 +19,6 @@ class NoteView extends GetView<NoteController> {
   Widget build(BuildContext context) {
     final String docId = controller.docId;
     final String label = controller.docLabel;
-    final doc = appController.db.collection('notes').doc(docId);
     final docItems = appController.db
         .collection('notes')
         .doc(docId)
@@ -91,7 +90,13 @@ class NoteView extends GetView<NoteController> {
                         child: itemRender(snapshot, showTitle, context, docId),
                       );
                     } else {
-                      return Container();
+                      return FadeTransition(
+                        opacity: animation,
+                        child: Opacity(
+                            opacity: .2,
+                            child: itemRender(
+                                snapshot, showTitle, context, docId)),
+                      );
                     }
                   } catch (e) {
                     return Container();

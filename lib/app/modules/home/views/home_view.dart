@@ -136,11 +136,13 @@ class _HomeViewState extends State<HomeView> {
                                 "You sure you want to delete this Note?",
                             title: "Delete",
                             onConfirm: () {
+                              var map = snapshot.data();
+                              map['isDeleted'] = true;
                               appController.db
                                   .collection('notes')
                                   .doc(snapshot.id)
-                                  .update({"isDeleted": true}).then(
-                                      (value) => Get.back());
+                                  .set(map, SetOptions(merge: true))
+                                  .then((value) => Get.back());
                             },
                             onCancel: () {},
                           );
