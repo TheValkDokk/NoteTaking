@@ -45,7 +45,7 @@ flutter:
       fonts:
         - asset: packages/firebase_ui_auth/fonts/SocialIcons.ttf
   assets:
-    - .env
+    - dotenv
   uses-material-design: true
 
 flutter_native_splash:
@@ -53,7 +53,6 @@ flutter_native_splash:
   image: assets/icon_launcher/mipmap-xxxhdpi/ic_launcher.png
   color_dark: "#121212"
   android_12: null
-  web: false
 
 icons_launcher:
   image_path: "assets/icon_launcher/icons8-note-64.png"

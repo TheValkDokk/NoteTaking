@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:motion/motion.dart';
 import 'package:notetaking/app/controller/app_controller.dart';
@@ -40,13 +39,10 @@ void main() async {
     };
   }
 
-  await GetStorage.init();
-  await dotenv.load();
-  if (kIsWeb) {
-  } else {
-    await Motion.instance.initialize();
-    Motion.instance.setUpdateInterval(60.fps);
-  }
+  await dotenv.load(fileName: 'dotenv');
+
+  await Motion.instance.initialize();
+  Motion.instance.setUpdateInterval(60.fps);
 
   Get.put(AppController());
 

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -7,8 +8,8 @@ class AppController extends GetxController {
   static AppController instance = Get.find();
 
   GoogleProvider googleProvider = GoogleProvider(
-    clientId:
-        '345963871008-qph34avag3hakk9ffich62ihcia3834c.apps.googleusercontent.com',
+    clientId: dotenv.env[
+        '345963871008-qph34avag3hakk9ffich62ihcia3834c.apps.googleusercontent.com']!,
   );
 
   RxBool isDark = false.obs;
